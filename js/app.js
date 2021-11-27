@@ -5,6 +5,7 @@
 function setGame() {
     gGame = {
         isGameOver: false,
+        isGameWon: false,
         shownCount: 0,
         markedCount: 0,
         secondsPassed: 0,
@@ -181,7 +182,7 @@ function checkVictory() {
     var elHeader = document.querySelector('h3');
     if (gGame.shownCount === gBoard.length ** 2 - gMine) {
         if (gMinesCount === 0 || gGame.markedCount === gMine) {
-            gGame.isGameOver = true;
+            gGame.isGameWon = true;
             elHeader.innerText = WINNER_IMG;
             clearInterval(gInterval);
         }
