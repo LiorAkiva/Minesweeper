@@ -131,6 +131,7 @@ function hintRevealNegs(hint, rowIdx, colIdx) {
 }
 
 function safeRevealCell(safe){
+    if(gGame.shownCount === gBoard.length ** 2 - gMine) return;
     var isFound = false;
     var rowIdx;
     var colIdx;
