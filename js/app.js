@@ -191,7 +191,8 @@ function checkVictory() {
 // checks if game is over and changes h3 to "lose"
 function checkGameOver() {
     if (gGame.isGameOver === true) {
-        changeSubtexts();
+        var elHeader = document.querySelector('h3');
+        elHeader.innerText = LOSER_IMG;
         for(var i= 0; i< gBoard.length; i++){
             for(var j = 0; j < gBoard.length; j++){
                 var currCell = gBoard[i][j];
