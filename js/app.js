@@ -145,7 +145,6 @@ function safeRevealCell(safe){
         isFound = true;
     }
     }
-    console.log(gSafeCell.rowIdx)
     var elCell = document.querySelector(`.cell-${gSafeCell.rowIdx}-${gSafeCell.colIdx}`);
     if(safe === true || isFound === true){
         elCell.classList.remove('hidden');
@@ -181,7 +180,7 @@ function keepBoardSteps(board) {
 function checkVictory() {
     var elHeader = document.querySelector('h3');
     if (gGame.shownCount === gBoard.length ** 2 - gMine) {
-        if (gGame.markedCount === gMine || gMinesCount === 0) {
+        if (gMinesCount === 0 || gGame.markedCount === gMine) {
             gGame.isGameOver = true;
             elHeader.innerText = WINNER_IMG;
             clearInterval(gInterval);
@@ -192,8 +191,7 @@ function checkVictory() {
 // checks if game is over and changes h3 to "lose"
 function checkGameOver() {
     if (gGame.isGameOver === true) {
-        var elHeader = document.querySelector('h3');
-        elHeader.innerText = LOSER_IMG;
+        changeSubtexts();
         for(var i= 0; i< gBoard.length; i++){
             for(var j = 0; j < gBoard.length; j++){
                 var currCell = gBoard[i][j];

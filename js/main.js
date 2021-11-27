@@ -78,15 +78,13 @@ function cellClicked(elCell, i, j) {
     gGame.boardSteps.push(keepBoardSteps(gBoard));
     if (gBoard[i][j].isMine === true) {
         elCell.isShown = true;
-        console.log(elCell.isShown)
-        console.log(gBoard[i][j])
         gLives--;
         setLives(gLives);
         gMinesCount--;
-        changeSubtexts();
         elCell.classList.remove('hidden');
         elCell.style.backgroundColor = 'rgb(214, 66, 66)';
         elCell.innerText = MINE_IMG;
+        checkVictory();
         if (gLives === 0) {
             gGame.isGameOver = true;
         }
@@ -104,10 +102,7 @@ function cellClicked(elCell, i, j) {
         elCell.innerText = negCells;
         gGame.shownCount++;
     }
-    
-    
     checkVictory();
-    
 
 }
 
