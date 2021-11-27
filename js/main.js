@@ -132,6 +132,7 @@ function showHint(rowIdx, colIdx) {
 }
 
 function safe(ev){
+    if(gGame.shownCount === gBoard.length ** 2 - gMine) return;
     if(gGame.isGameOver === true || gFirstMove ===0) return;
     if(gSafes === 0 || gIsSafe === true) return;
     if(gIsHint === true) return;
