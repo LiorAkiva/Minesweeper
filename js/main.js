@@ -81,6 +81,7 @@ function cellClicked(elCell, i, j) {
         gLives--;
         setLives(gLives);
         gMinesCount--;
+        changeSubtexts()
         elCell.classList.remove('hidden');
         elCell.style.backgroundColor = 'rgb(214, 66, 66)';
         elCell.innerText = MINE_IMG;
