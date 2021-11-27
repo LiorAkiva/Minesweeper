@@ -6,6 +6,7 @@ const LOSER_IMG = '😣'
 const GAME_IMG = '🙂'
 const WINNER_IMG = '😎'
 const MINE_IMG = '💣';
+const MARK_IMG = '🏴'
 const FLAG_IMG = '🚩';
 
 var gInterval;
@@ -22,8 +23,9 @@ var gHints;
 var gSafes;
 var gIsHint;
 var gIsSafe;
+var gSafeCell;
 
-
+////////////////////////////////////////////////////////////////////////////////////
 
 
 // initialize all global variables and board
@@ -97,7 +99,9 @@ function cellClicked(elCell, i, j) {
         elCell.innerText = negCells;
         gGame.shownCount++;
     }
+    
     checkVictory();
+    
 
 }
 
@@ -119,6 +123,24 @@ function showHint(rowIdx, colIdx) {
         gIsHint = false;
         hintRevealNegs(false, rowIdx, colIdx);
     }, 500);
+}
+
+function safe(ev){
+    if(gGame.isGameOver === true || gFirstMove ===0) return;
+    if(gSafes === 0 || gIsSafe === true) return;
+    if(gIsHint === true) return;
+    gSafes--;
+    gIsSafe = true;
+    showSafe()
+}
+
+function showSafe(){
+    setSafes(gSafes);
+    safeRevealCell(true);
+    setTimeout(function(){
+        gIsSafe = false;
+        safeRevealCell(false);
+    }, 700);
 }
 
 // when right click - marks cell believed to be a mine

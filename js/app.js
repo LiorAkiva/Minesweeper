@@ -20,6 +20,10 @@ function setHelp() {
     gIsHint = false;
     gIsSafe = false;
     gFirstMove = 0;
+    gSafeCell = {
+        rowIdx: 0,
+        colIdx: 0
+    }
 }
 
 // builds a mat according to the picked level
@@ -124,6 +128,32 @@ function hintRevealNegs(hint, rowIdx, colIdx) {
     }
 }
 
+function safeRevealCell(safe){
+    var isFound = false;
+    var rowIdx;
+    var colIdx;
+    if(safe === true){
+    while(isFound === false){
+        rowIdx = getRandomInt(0, gBoard.length);
+        colIdx = getRandomInt(0, gBoard[0].length);
+        var currCell = gBoard[rowIdx][colIdx]
+        if(currCell.isShown || currCell.isMine || currCell.isMarked) continue;
+        gSafeCell.rowIdx = rowIdx;
+        gSafeCell.colIdx = colIdx;
+        isFound = true;
+    }
+    }
+    console.log(gSafeCell.rowIdx)
+    var elCell = document.querySelector(`.cell-${gSafeCell.rowIdx}-${gSafeCell.colIdx}`);
+    if(safe === true || isFound === true){
+        elCell.classList.remove('hidden');
+        elCell.classList.add('safeZone');
+    }else {
+        elCell.classList.add('hidden');
+        elCell.classList.remove('safeZone');
+    }
+}
+
 // keeps user's move inside a mat.
 function keepBoardSteps(board) {
     var boardSteps = [];
@@ -162,6 +192,16 @@ function checkGameOver() {
     if (gGame.isGameOver === true) {
         var elHeader = document.querySelector('h3');
         elHeader.innerText = LOSER_IMG;
+        for(var i= 0; i< gBoard.length; i++){
+            for(var j = 0; j < gBoard.length; j++){
+                var currCell = gBoard[i][j];
+                if(currCell.isMine === true){
+                    var elCell = document.querySelector(`.cell-${i}-${j}`);
+                    elCell.classList.remove('hidden');
+                    elCell.innerText = MINE_IMG;
+                }
+            }
+        }
         clearInterval(gInterval);
     }
 }
