@@ -65,17 +65,21 @@ function renderBoard(board) {
 // checks each time if GAMEOVER/GAMEWON
 function cellClicked(elCell, i, j) {
     if (gGame.isGameOver === true) return;
+    if (elCell.isMarked === true) return;
+    if(elCell.isShown === true)return;
     var cellIdx = gBoard[i][j];
     if (gFirstMove === 0) {
         setTimer();
         getMineCells(gBoard, gMine, cellIdx);
         gFirstMove++;
     }
-    if (elCell.isMarked === true || elCell.isShown === true) return;
     if (gIsHint === true) return showHint(i, j);
     cellIdx.isShown = true;
     gGame.boardSteps.push(keepBoardSteps(gBoard));
     if (gBoard[i][j].isMine === true) {
+        elCell.isShown = true;
+        console.log(elCell.isShown)
+        console.log(gBoard[i][j])
         gLives--;
         setLives(gLives);
         gMinesCount--;
@@ -90,6 +94,7 @@ function cellClicked(elCell, i, j) {
     }
     var negCells = setMinesNegsCount(gBoard, i, j);
     if (negCells === 0) {
+        elCell.isShown = true;
         elCell.classList.remove('hidden');
         gGame.shownCount++;
         revealNegs(i, j);
@@ -99,6 +104,7 @@ function cellClicked(elCell, i, j) {
         elCell.innerText = negCells;
         gGame.shownCount++;
     }
+    
     
     checkVictory();
     

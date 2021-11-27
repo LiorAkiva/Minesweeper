@@ -91,10 +91,12 @@ function revealNegs(rowIdx, colIdx){
                 elCell.innerText ='';
             } else{
             elCell.innerText = negCells;
+            elCell.isShown = true;
             }
             gBoard[i][j].isShown = true;
             gGame.shownCount++;
             if (negCells === 0){
+                elCell.isShown = true;
              revealNegs(i, j);
             }    
           }
