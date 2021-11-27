@@ -47,7 +47,7 @@ h3{
     font-family:' monospace';
     margin-top: 3px;
     margin-bottom: 35px;
-    margin-right: 35px;
+    /* margin-right: 35px; */
     height: 20px;
     
     display: inline-block;
@@ -55,11 +55,13 @@ h3{
 
 .mines-left{
     color:rgb(148, 90, 160);
+    background-color: ivory;
     display: inline-block;
-    width: 130px;
+    width: 140px;
     height: 20px;
     font-size: 18px;
     font-weight:bold;
+    margin-left: 35px;
 
     font-family:'Courier New', Courier, monospace;
     
